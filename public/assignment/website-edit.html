@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Website</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+</head>
+<body class="hide-overflow">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid row text-blue">
+        <div class="col-xs-1 col-sm-1 padding-0 pull-left">
+            <p class="navbar-text navbar-left">
+                <a href="website-list.html" class="navbar-link">
+                    <span class="glyphicon glyphicon-chevron-left text-white"></span>
+                </a>
+            </p>
+        </div>
+        <div class="col-sm-3 hidden-xs padding-0">
+            <p class="navbar-text navbar-left">
+                <b class="text-white">Websites</b>
+                <a href="website-new.html" class="navbar-link pull-right left-padding">
+                    <span class="glyphicon glyphicon-plus text-white"></span>
+                </a>
+            </p>
+        </div>
+
+        <div class="col-xs-10 col-sm-8 padding-0">
+            <p class="navbar-text">
+                <b class="text-white no-left-padding">Edit Website</b>
+                <a href="website-list.html" class="navbar-link pull-right">
+                <span class="glyphicon glyphicon-ok text-white">
+                </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="row container-fluid">
+    <div class="col-xs-4 hidden-xs vertical-line">
+        <p class="top-padding bottom-padding left-padding">
+            <a href="page-list.html">Address Book App</a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
+            </a>
+        </p>
+        <p class="bottom-padding left-padding">
+            <a href="page-list.html">Blogger</a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
+            </a>
+        </p>
+        <p class="bottom-padding left-padding">
+            <a href="page-list.html">Bloging App</a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
+            </a>
+        </p>
+        <p class="bottom-padding left-padding">
+            <a href="page-list.html">Script Testing App</a>
+            <a href="website-edit.html">
+                <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
+            </a>
+        </p>
+    </div>
+
+    <div class="col-xs-12 col-sm-8">
+        <form>
+            <div class="form-group top-padding">
+                <label for="Name">Application Name</label>
+                <input class="form-control" type="text" id="Name" placeholder="Blogger">
+                <label for="Description">Application Description</label>
+            <textarea class="form-control" rows="5" id="Description" placeholder="Blogger is a blog-publishing service that allows multi-user blogs with time-stamped entries. It was developed by Pyra Labs, which was bought by Google in 2003. Generally, the blogs are hosted by Google at a subdomain of blogspot.com.
+"></textarea>
+                <a class="btn btn-danger  btn-block" href="website-list.html">Delete</a>
+            </div>
+        </form>
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+    <div class="container-fluid text-blue">
+        <p class="navbar-text pull-right">
+            <a href="profile.html" class="navbar-link">
+                <span class="glyphicon glyphicon-user text-white">
+                </span>
+            </a>
+    </div>
+</nav>
+</body>
+</html>

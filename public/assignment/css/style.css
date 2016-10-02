@@ -1,7 +1,70 @@
-input.form-control {
+body {
+    padding-top: 36px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.text-white {
+    color: white;
+}
+
+.text-blue {
+    background-color: #337ab7;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.form-control {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top: 36px;
+.top-padding {
+    margin-top: 25px;
+}
+
+.bottom-padding {
+    margin-bottom: 10px;
+}
+
+.right-padding {
+    margin-right: 15px;
+}
+
+.left-padding {
+    margin-left: 12px;
+}
+
+.no-left-padding {
+    padding-left: 0px !important;
+}
+
+.no-right-padding {
+    padding-right: 0px !important;
+}
+
+.vertical-line {
+    border-right:1px solid gray;
+    height:100% !important;
+    min-height: 100%;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.relative-position {
+    position: relative;
+}
+.absolute-position {
+    position: absolute;
+}
+.float-items {
+    top: 0px;
+    right: 0px;
+    background-color: white;
+    z-index: 100;
 }
