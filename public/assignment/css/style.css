@@ -1,7 +1,6 @@
 body {
     padding-top: 36px;
-    overflow-x: hidden;
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 a {
@@ -67,4 +66,16 @@ a {
     right: 0px;
     background-color: white;
     z-index: 100;
+}
+
+.no-left-margin {
+    margin-left: 0px;
+}
+
+.no-right-margin {
+    margin-right: 0px;
+}
+
+.margin-right-30 {
+    margin-right: 30px;
 }
