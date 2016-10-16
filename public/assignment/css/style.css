@@ -1,6 +1,6 @@
 body {
     padding-top: 36px;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 a {
@@ -29,6 +29,10 @@ a {
 
 .bottom-padding {
     margin-bottom: 10px;
+}
+
+.bottom-margin {
+    margin-bottom: 50px;
 }
 
 .right-padding {

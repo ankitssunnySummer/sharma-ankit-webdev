@@ -1,0 +1,54 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid text-blue">
+        <p class="navbar-text full-width">
+            <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page"
+               class="navbar-link">
+                <span class="glyphicon glyphicon-chevron-left text-white"></span>
+            </a>
+            <b class="left-padding text-white">Widgets</b>
+            <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget/new"
+               class="navbar-link pull-right ">
+                <span class="glyphicon glyphicon-plus text-white right-padding"></span>
+            </a>
+        </p>
+    </div>
+</nav>
+<div class="container-fluid navbar-text top-padding ">
+    <div ng-repeat="widget in model.widgets">
+        <div class="bottom-padding relative-position">
+            <div class="container-fluid no-right-padding">
+                <div ng-switch = "widget.widgetType">
+                    <div ng-switch-when="HEADER">
+                        <h2> <strong>{{widget.text}}</strong> </h2>
+                    </div>
+                    <div ng-switch-when="IMAGE">
+                        <img class="img-responsive" src={{widget.url}}>
+                    </div>
+                    <div ng-switch-when="YOUTUBE">
+                        <iframe width="320" height="315" src={{widget.url}}>
+                        </iframe>
+                    </div>
+                    <div ng-switch-when="HTML">
+                        <h2> <strong>{{widget.text}}</strong> </h2>
+                    </div>
+                </div>
+                <div class="absolute-position float-items no-right-padding">
+                    <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/{{widget._id}}">
+                        <span class="glyphicon glyphicon-cog"></span></a>
+                    <span class="glyphicon glyphicon-menu-hamburger"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<nav class="navbar navbar-default navbar-fixed-bottom ">
+    <div class="container-fluid  text-blue">
+        <div class="pull-right">
+            <p class="navbar-text no-right-padding ">
+                <a ng-href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user text-white right-padding"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
