@@ -1,18 +1,3 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid text-blue">
-        <p class="navbar-text full-width">
-            <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget"
-               class="navbar-link">
-                <span class="glyphicon glyphicon-chevron-left text-white"></span>
-            </a>
-            <b class="left-padding text-white">Widget Edit</b>
-            <a href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/widget"
-               class="navbar-link pull-right ">
-                <span class="glyphicon glyphicon-ok text-white right-padding"></span>
-            </a>
-        </p>
-    </div>
-</nav>
 <div ng-switch="model.widget.widgetType">
     <div ng-switch-when="HEADER">
         <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>

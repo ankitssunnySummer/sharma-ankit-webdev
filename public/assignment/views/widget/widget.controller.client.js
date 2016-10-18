@@ -61,10 +61,16 @@
         vm.page = PageService.findPageById(pageId);
         vm.widget = WidgetService.findWidgetById(widgetId);
         vm.deleteWidget = deleteWidget;
+        vm.updateWidget = updateWidget;
 
         function deleteWidget(widgetId) {
             if(WidgetService.deleteWidget(widgetId) != null)
                 $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
+        }
+
+        function updateWidget(wid, widget) {
+            WidgetService.updateWidget(wid, widget);
+            $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/widget");
         }
     }
 })();       

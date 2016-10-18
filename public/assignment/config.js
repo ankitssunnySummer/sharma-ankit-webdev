@@ -73,21 +73,6 @@
                 controller      : "EditWidgetController",
                 controllerAs    : "model"
             })
-            .when("/user/:uid/website/:wid/page/:pid/:wgid/heading", {
-                templateUrl     : "views/widget/widget-edit.view.client.html",
-                controller      : "EditWidgetController",
-                controllerAs    : "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/:wgid/image", {
-                templateUrl     : "views/widget/widget-edit.view.client.html",
-                controller      : "EditWidgetController",
-                controllerAs    : "model"
-            })
-            .when("/user/:uid/website/:wid/page/:pid/:wgid/youtube", {
-                templateUrl     : "views/widget/widget-edit.view.client.html",
-                controller      : "EditWidgetController",
-                controllerAs    : "model"
-            })
             .otherwise({
                 templateUrl     : "views/user/login.view.client.html",
                 controller      : "LoginController",
