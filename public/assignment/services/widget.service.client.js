@@ -7,7 +7,7 @@
         .factory("WidgetService", WidgetService);
     function WidgetService() {
 
-        var widgets  = [{ "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
+        var widgets  = [{ "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 1, "text": "GIZMODO"},
             { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
             { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
                 "url": "http://lorempixel.com/400/200/"},
