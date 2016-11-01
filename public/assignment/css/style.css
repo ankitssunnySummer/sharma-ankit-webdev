@@ -84,3 +84,7 @@ a {
 .margin-right-30 {
     margin-right: 30px;
 }
+
+.displayNone {
+  display: none
+}

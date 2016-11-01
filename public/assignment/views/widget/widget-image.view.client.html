@@ -15,7 +15,7 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <form>
+    <form action="/api/upload" method="post" enctype="multipart/form-data">
         <div class="form-group top-padding">
             <label for="Name">Name</label>
             <input ng-model="model.widget.name"
@@ -33,12 +33,14 @@
             <input ng-model="model.widget.width"
                    class="form-control" type="number"
                    id="Width" placeholder="100%">
+            <input  name="width"    value="{{model.widget.width}}" class= "displayNone"/>
+            <input  name="widgetId" value="{{model.widget._id}}"   class= "displayNone"/>
             <label for="Upload">Upload</label>
             <!-- model.widget.upload doesn't exist yet. Just keeping as a placeholder-->
-            <input ng-model="model.widget.upload"
+            <input name="uploadedFile"
                    class="form-control"
                    type="file" id="Upload">
-            <a class="btn btn-primary  btn-block text-left" href="#/login">Upload Image</a>
+            <button type="submit" class="btn btn-block btn-primary">Upload Image</button>
             <a ng-click="model.deleteWidget(model.widget._id)"
                class="btn btn-danger  btn-block">Delete</a>
         </div>

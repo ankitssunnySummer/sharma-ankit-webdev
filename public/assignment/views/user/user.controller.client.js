@@ -14,13 +14,19 @@
         vm.login = login;
 
         function login(username, password) {
-            var user = UserService.findUserByCredentials(username, password);
-            if (user != null) {
-                $location.url("/user/" + user._id);
-            }
-            else {
-                vm.alert = "Username and/or password not found. Please try again.";
-            }
+            UserService
+                .findUserByCredentials(username, password)
+                .success(function (user) {
+                    if (user != '0') {
+                        $location.url("/user/" + user._id);
+                    }
+                    else {
+                        vm.alert = "Username and/or password not found. Please try again.";
+                    }
+                })
+                .error(function () {
+
+                })
         }
     }
 
@@ -42,35 +48,66 @@
             else {
                 var id = randomString(3, '0123456789');
                 var newUser = {_id: id, username: username, password: password, firstName: "", lastName: ""};
-                UserService.createUser(newUser);
-                $location.url("/user/" + newUser._id);
+                UserService
+                    .createUser(newUser)
+                    .success(function (user) {
+                        $location.url("/user/" + user._id);
+                    })
+                    .error(function () {
+
+                    });
             }
         }
     }
 
     function ProfileController($routeParams, $location, UserService) {
         var vm = this;
+        delete vm.alert;
         var userId = $routeParams["uid"];
-        vm.user  = UserService.findUserById(userId);
+        UserService
+            .findUserById(userId)
+            .success(function (user) {
+                if (user != '0') {
+                    vm.user = user;
+                }
+                else {
+                    vm.alert = "Username and/or password not found. Please try again.";
+                }
+            })
+            .error(function () {
+
+            })
+
+
         vm.updateProfile = updateProfile;
+        vm.deleteUser = deleteUser;
 
-
-        function updateProfile(username, email, firstName, lastName) {
-            delete vm.alert;
+        function updateProfile() {
             if(username === "" || email === "") {
                 vm.alert = "Username and/or email cannot be empty. Please try again";
             }
             else {
-                console.log("isnide else");
-                var updatedUser = {
-                    _id: userId,
-                    username: username,
-                    firstName: firstName,
-                    lastName: lastName,
-                    email: email};
-                UserService.updateUser(userId, updatedUser);
-                $location.url("/user/" + userId);
+                UserService
+                    .updateUser(userId, vm.user)
+                    .success(function (user) {
+                        $location.url("/user/" + userId);
+                    })
+                    .error(function (error) {
+                        console.log(error);
+                    });
             }
+        }
+
+        function deleteUser(){
+            UserService
+                .deleteUser(userId)
+                .success(function (userId) {
+                    vm.alert = "User" + userId + "deleted.";
+                    $location.url("/login");
+                })
+                .error(function (error) {
+                    console.log(error);
+                });
         }
     }
 })();

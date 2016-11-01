@@ -14,39 +14,41 @@
     </div>
 </nav>
 
-<div class="container-fluid navbar-text top-padding ">
+<div class="container-fluid navbar-text top-padding sortable">
     <div ng-switch = "widget.widgetType" ng-repeat="widget in model.widgets">
-        <div class="bottom-padding relative-position">
-            <div class="container-fluid no-right-padding">
+        <div ng-if="widget.widgetType">
+            <div class="bottom-padding relative-position">
+                <div class="container-fluid no-right-padding">
 
-                <div ng-switch="widget.size" ng-switch-when="HEADER">
-                    <h1 ng-switch-when="1">{{widget.text}}</h1>
-                    <h2 ng-switch-when="2">{{widget.text}}</h2>
-                    <h3 ng-switch-when="3">{{widget.text}}</h3>
-                    <h4 ng-switch-when="4">{{widget.text}}</h4>
-                    <h5 ng-switch-when="5">{{widget.text}}</h5>
-                    <h6 ng-switch-when="6">{{widget.text}}</h6>
+                        <div ng-switch="widget.size" ng-switch-when="HEADER">
+                            <h1 ng-switch-when="1">{{widget.text}}</h1>
+                            <h2 ng-switch-when="2">{{widget.text}}</h2>
+                            <h3 ng-switch-when="3">{{widget.text}}</h3>
+                            <h4 ng-switch-when="4">{{widget.text}}</h4>
+                            <h5 ng-switch-when="5">{{widget.text}}</h5>
+                            <h6 ng-switch-when="6">{{widget.text}}</h6>
+                        </div>
+
+                    <div ng-switch-when="YOUTUBE">
+                        <iframe width="560" height="315"
+                                ng-src="{{model.checkSafeYouTube(widget.url)}}"
+                                frameborder="0" allowfullscreen></iframe>
+                    </div>
+
+                    <div ng-switch-when="IMAGE">
+                        <img class="img-responsive" ng-src="{{model.checkSafeImage(widget.url)}}">
+                    </div>
+
+                    <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
+                    </div>
+
+                    <div class="absolute-position float-items no-right-padding">
+                        <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/{{widget._id}}">
+                            <span class="glyphicon glyphicon-cog"></span></a>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </div>
+
                 </div>
-
-                <div ng-switch-when="YOUTUBE">
-                    <iframe width="560" height="315"
-                            ng-src="{{model.checkSafeYouTube(widget.url)}}"
-                            frameborder="0" allowfullscreen></iframe>
-                </div>
-
-                <div ng-switch-when="IMAGE">
-                    <img class="img-responsive" ng-src="{{model.checkSafeImage(widget.url)}}">
-                </div>
-
-                <div ng-switch-when="HTML" ng-bind-html="model.checkSafeHtml(widget.text)">
-                </div>
-
-                <div class="absolute-position float-items no-right-padding">
-                    <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/{{widget._id}}">
-                        <span class="glyphicon glyphicon-cog"></span></a>
-                    <span class="glyphicon glyphicon-menu-hamburger"></span>
-                </div>
-
             </div>
         </div>
     </div>
