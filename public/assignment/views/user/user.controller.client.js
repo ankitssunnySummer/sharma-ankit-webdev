@@ -1,7 +1,6 @@
 /**
  * Created by Ankit on 10/13/2016.
  */
-
 (function() {
     angular.module("WebAppMaker")
         .controller("LoginController", LoginController)
@@ -10,14 +9,13 @@
 
     function LoginController($location, UserService) {
         var vm = this;  //vm stands for View Model.
-
         vm.login = login;
 
         function login(username, password) {
             UserService
                 .findUserByCredentials(username, password)
                 .success(function (user) {
-                    if (user != '0') {
+                    if (user != null) {
                         $location.url("/user/" + user._id);
                     }
                     else {
@@ -25,36 +23,35 @@
                     }
                 })
                 .error(function () {
-
+                    console.log("Error while logging in.");
                 })
         }
-    }
-
-    function randomString(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
     }
 
     function RegisterController($location, UserService) {
         var vm = this;
         vm.createUser = createUser;
 
-        function createUser(username, password) {
-            if(username == undefined || password == undefined) {
-                vm.alert = "Username and/or Password cannot be blank. Please try again.";
+        function createUser() {
+
+            if(vm.user.username == undefined || vm.user.password == undefined || vm.user.password != vm.user.verifyPassword ) {
+                vm.alert = "Username and/or Password cannot be blank and passwords should match. Please try again.";
                 $location.url("/register");
             }
             else {
-                var id = randomString(3, '0123456789');
-                var newUser = {_id: id, username: username, password: password, firstName: "", lastName: ""};
+                var newUser = {username: vm.user.username, password: vm.user.password, firstName: "", lastName: ""};
                 UserService
                     .createUser(newUser)
                     .success(function (user) {
-                        $location.url("/user/" + user._id);
+                        if (user != null) {
+                            $location.url("/user/" + user._id);
+                        }
+                        else {
+                            vm.alert = "Username already present. Please try again with a different Username.   "
+                        }
                     })
                     .error(function () {
-
+                        console.log("Error while creating new User.")
                     });
             }
         }
@@ -75,9 +72,8 @@
                 }
             })
             .error(function () {
-
+                console.log("Error while inside Profile Controller.")
             })
-
 
         vm.updateProfile = updateProfile;
         vm.deleteUser = deleteUser;
@@ -93,7 +89,7 @@
                         $location.url("/user/" + userId);
                     })
                     .error(function (error) {
-                        console.log(error);
+                        console.log("Error while updating:" + error);
                     });
             }
         }
@@ -106,7 +102,7 @@
                     $location.url("/login");
                 })
                 .error(function (error) {
-                    console.log(error);
+                    console.log("Error while deleting:" + error);
                 });
         }
     }

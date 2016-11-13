@@ -1,7 +1,6 @@
 /**
  * Created by Ankit on 10/13/2016.
  */
-
 (function() {
     angular
         .module("WebAppMaker")
@@ -12,12 +11,11 @@
             findWebsitesByUser    : findWebsitesByUser,
             findWebsiteById       : findWebsiteById,
             updateWebsite         : updateWebsite,
-            deleteWebsite         : deleteWebsite};
-
+            deleteWebsite         : deleteWebsite
+        };
         return api;
 
         function createWebsite(userId, website) {
-            console.log("inside create client");
             return $http.post("/api/user/" + userId + "/website", website);
         }
 

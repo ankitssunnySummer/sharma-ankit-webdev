@@ -4,7 +4,7 @@
 
             <div class="col-sm-4 hidden-xs">
                 <div class="navbar-text pull-left no-left-margin">
-                    <a ng-href="#/user/{{model.website.developerId}}/website">
+                    <a ng-href="#/user/{{model.website._user}}/website">
                         <span class="glyphicon glyphicon-chevron-left text-white"></span>
                     </a>
                 </div>
@@ -14,7 +14,7 @@
                     </div>
                 </div>
                 <div class="navbar-text pull-right margin-right-30">
-                    <a ng-href="#/user/{{model.website.developerId}}/website/new">
+                    <a ng-href="#/user/{{model.website._user}}/website/new">
                         <span class="glyphicon glyphicon-plus text-white"></span>
                     </a>
                 </div>
@@ -26,7 +26,7 @@
                     </a>
                 </div>
                 <div class="navbar-header">
-                    <a ng-href= "#/user/{{model.website.developerId}}/website/{{model.website._id}}"
+                    <a ng-href= "#/user/{{model.website._user}}/website/{{model.website._id}}"
                        class="navbar-brand text-white">
                         <b class="text-white">Edit Website</b>
                     </a>
@@ -44,8 +44,8 @@
             <div ng-repeat="website in model.websites">
                 <div  class=" row">
                     <p class="bottom-padding left-padding">
-                        <a ng-href="#/user/{{website.developerId}}/website/{{website._id}}/page">{{website.name}}</a>
-                        <a ng-href="#/user/{{website.developerId}}/website/{{website._id}}">
+                        <a ng-href="#/user/{{website._user}}/website/{{website._id}}/page">{{website.name}}</a>
+                        <a ng-href="#/user/{{website._user}}/website/{{website._id}}">
                             <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
                         </a>
                     </p>
@@ -77,7 +77,7 @@
 <nav class="navbar navbar-default navbar-fixed-bottom ">
     <div class="container-fluid text-blue">
         <p class="navbar-text pull-right">
-            <a ng-href="#/user/{{model.website.developerId}}"
+            <a ng-href="#/user/{{model.website._user}}"
                class="navbar-link">
                 <span class="glyphicon glyphicon-user text-white">
                 </span>

@@ -23,7 +23,7 @@
         }
 
         function findUserByUsername(username) {
-            return $http.get('/api/user/' + id);
+            return $http.get('/api/user?username=' + username);
         }
 
         function findUserByCredentials(username, password) {

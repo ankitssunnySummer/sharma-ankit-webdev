@@ -6,7 +6,7 @@
                 <span class="glyphicon glyphicon-chevron-left text-white"></span>
             </a>
             <b class="left-padding text-white">Edit Page</b>
-            <a ng-click="model.updatePage(model.page.name, model.page.title)"
+            <a ng-click="model.updatePage()"
                class="navbar-link pull-right" href="">
                 <span class="glyphicon glyphicon-ok text-white right-padding"></span>
             </a>
@@ -25,7 +25,10 @@
             <label for="Title">Title</label>
             <input ng-model="model.page.title"
                    class="form-control" type="text" id="Title" placeholder="Page Title">
-            <a ng-click="model.deletePage(model.page._id)"
+            <label for="Description">Description</label>
+            <input ng-model="model.page.description"
+                   class="form-control" type="text" id="Description" placeholder="Page Description">
+            <a ng-click="model.deletePage()"
                class="btn btn-danger btn-block">Delete</a>
         </div>
     </form>

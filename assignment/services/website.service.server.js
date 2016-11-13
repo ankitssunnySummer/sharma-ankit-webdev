@@ -1,14 +1,8 @@
 /**
  * Created by Ankit on 10/30/2016.
  */
-module.exports = function(app) {
-    var websites = [
-        { "_id": "123", "name": "Facebook",    "developerId": "456", "description": "Facebook website"},
-        { "_id": "234", "name": "Tweeter",     "developerId": "456", "description": "Tweeter website"},
-        { "_id": "456", "name": "Gizmodo",     "developerId": "456", "description": "Gizmode website"},
-        { "_id": "567", "name": "Tic Tac Toe", "developerId": "123", "description": "Tic Tac Toe website"},
-        { "_id": "678", "name": "Checkers",    "developerId": "123", "description": "Checkers website"},
-        { "_id": "789", "name": "Chess",       "developerId": "234", "description": "Chess website"}];
+module.exports = function(app, models) {
+    var WebsiteModel = models.WebsiteModel;
 
     app.post("/api/user/:userId/website", createWebsite);
     app.get("/api/user/:userId/website", findAllWebsitesForUser);
@@ -17,73 +11,73 @@ module.exports = function(app) {
     app.delete("/api/website/:websiteId", deleteWebsite);
 
     function createWebsite(req, resp) {
-        console.log("Inside server");
         var userId = req.params.userId;
         var website = req.body;
-        var newWebsite = {
-            "_id": website._id,
-            "name": website.name,
-            "developerId": userId,
-            "description": website.description};
-        websites.push(newWebsite);
-        resp.send(newWebsite);
-        return;
+        WebsiteModel
+            .createWebsiteForUser(userId, website)
+            .then(
+                function (website) {
+                    resp.json(website);
+                },
+                function (error) {
+                    console.log("Error while creating website : " +error);
+                }
+            );
     }
 
     function findAllWebsitesForUser(req, resp) {
         var userId = req.params.userId;
-        var websitesPerUser = [];
-        for(var w in websites) {
-            if(websites[w].developerId === userId){
-                websitesPerUser.push(websites[w]);
-            }
-        }
-        if (websitesPerUser.length > 0) {
-            resp.send(websitesPerUser);
-            return;
-        }
-        else resp.send('0');
+        WebsiteModel
+            .findAllWebsitesForUser(userId)
+            .then(
+                function (websites) {
+                    resp.json(websites);
+                },
+                function (error) {
+                    console.log("Cannot find websites: " + error);
+                }
+            );
     }
 
     function findWebsiteById(req, resp) {
         var websiteId = req.params.websiteId;
-        for(var w in websites) {
-            if(websites[w]._id === websiteId){
-                resp.send(websites[w]);
-                return;
-            }
-        }
-        resp.send('0');
+        WebsiteModel
+            .findWebsiteById(websiteId)
+            .then(
+                function (website) {
+                    resp.json(website);
+                },
+                function (error) {
+                    console.log("Error while trying to find website: " +error);
+                }
+            );
     }
 
     function updateWebsite(req, resp) {
         var websiteId = req.params.websiteId;
         var data = req.body;
-        for(var w in websites) {
-            if(websites[w]._id === websiteId){
-                websites[w].description = data.description;
-                websites[w].name = data.name;
-                resp.send(websites[w]);
-                return;
-            }
-        }
-        resp.send('0');
+        WebsiteModel
+            .updateWebsite(websiteId, data)
+            .then(
+                function (website) {
+                    resp.json(website);
+                },
+                function (error) {
+                    console.log("Cannot update website: " + error);
+                }
+            );
     }
 
     function deleteWebsite(req, resp){
         var websiteId = req.params.websiteId;
-        var w;
-        var flag = false;
-        for(w in websites) {
-            if(websites[w]._id === websiteId){
-                flag = true;
-                break;
-            }
-        }
-        if (flag == true) {
-            var deletedWebsite = websites.splice(w, 1);
-            resp.send(deletedWebsite[0]);
-        }
-        else resp.send('0');
+        WebsiteModel
+            .deleteWebsite(websiteId)
+            .then(
+                function (website) {
+                    resp.json(website);
+                },
+                function (error) {
+                    console.log("Error occurred: " + error);
+                });
     }
 };

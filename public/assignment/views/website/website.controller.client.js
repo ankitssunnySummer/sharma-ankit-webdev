@@ -15,7 +15,8 @@
             .success(function (user) {
                 vm.user = user;
             })
-            .error(function () {
+            .error(function (error) {
+                console.log("Error occurred: " + error);
 
             });
 
@@ -24,15 +25,10 @@
             .success(function (websites) {
                 vm.websites = websites;
             })
-            .error(function () {
+            .error(function (error) {
+                console.log("Error occurred: " + error);
 
             });
-    }
-
-    function randomString(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
     }
 
     function NewWebsiteController($routeParams, $location, WebsiteService, UserService) {
@@ -60,14 +56,12 @@
             });
 
         function createWebsite(name, description) {
-            console.log("Inside controller create website.")
             if (name == undefined && description == undefined) {
                 vm.alert = "Website Name and Description cannot be empty";
                 $location.url("/user/" + userId + "/website");
             }
             else {
-                var id = randomString(3, '0123456789');
-                var newWebsite = { "_id": id, "name": name, "description": description};
+                var newWebsite = {"name": name, "description": description};
                 WebsiteService
                     .createWebsite(userId, newWebsite)
                     .success(function (website) {
@@ -96,11 +90,12 @@
                     .success(function (websites) {
                         vm.websites = websites;
                     })
-                    .error(function () {
-
+                    .error(function (error) {
+                        console.log("Error occurred: " + error);
                     });
             })
-            .error(function () {
+            .error(function (error) {
+                console.log("Error occurred: " + error);
 
             });
 
@@ -110,7 +105,8 @@
             .success(function (website) {
                 vm.website= website;
             })
-            .error(function () {
+            .error(function (error) {
+                console.log("Error occurred: " + error);
 
             });
 
@@ -118,10 +114,10 @@
             WebsiteService
                 .deleteWebsite(websiteId)
                 .success(function (website) {
-                    $location.url("/user/" + website.developerId + "/website");
+                    $location.url("/user/" + userId + "/website");
                 })
-                .error(function () {
-
+                .error(function (err) {
+                    console.log("Error occurred: " + err);
                 });
         }
 
@@ -141,8 +137,8 @@
                     .success(function (website) {
                         $location.url("/user/" + userId + "/website/");
                     })
-                    .error(function () {
-
+                    .error(function (error) {
+                        console.log("Error while updating:"  +error);
                     });
             }
         }

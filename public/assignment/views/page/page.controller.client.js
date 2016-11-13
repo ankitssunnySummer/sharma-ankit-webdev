@@ -25,7 +25,7 @@
             .success(function (website) {
                 vm.website = website;
             })
-            .error(function () {
+            .error(function (error) {
                 console.log(error);
             });
 
@@ -37,12 +37,6 @@
             .error(function (error) {
                 console.log(error);
             });
-    }
-
-    function randomString(length, chars) {
-        var result = '';
-        for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
-        return result;
     }
 
     function NewPageController($routeParams, $location, UserService, WebsiteService, PageService) {
@@ -65,17 +59,16 @@
             .success(function (website) {
                 vm.website = website;
             })
-            .error(function () {
+            .error(function (error) {
                 console.log(error);
             });
 
-        function createPage(name, title) {
-            if(name == undefined || title == undefined){
+        function createPage() {
+            if(vm.page.name == undefined || vm.page.title == undefined){
                 vm.alert = "New page needs to have a name and a title. Try again";
             }
             else {
-                var id = randomString(3, '0123456789');
-                var newPage = { "_id": id, "name": name, "title": title};
+                var newPage = {"name": vm.page.name, "title": vm.page.title, "description": vm.page.description};
                 PageService
                     .createPage(websiteId, newPage)
                     .success(function (page) {
@@ -111,7 +104,7 @@
             .success(function (website) {
                 vm.website = website;
             })
-            .error(function () {
+            .error(function (error) {
                 console.log(error);
             });
 
@@ -124,26 +117,26 @@
                 console.log(error);
             });
 
-        function updatePage(name, title) {
+        function updatePage() {
             delete vm.alert;
 
-            if(name === "" || title === "") {
+            if(vm.page.name === "" || vm.page.title === "") {
                 vm.alert = "Page name and/or Title cannot be empty. Please try again";
             }
             else {
-                var updatedPage =   {"name": name, "title": title};
+                var updatedPage =   {"name": vm.page.name, "title": vm.page.title, "description": vm.page.description};
                 PageService
                     .updatePage(pageId, updatedPage)
                     .success(function (page) {
                         $location.url("/user/" + userId + "/website/" + websiteId + "/page");
                     })
-                    .error(function () {
+                    .error(function (error) {
                         console.log(error);
                     });
             }
         }
 
-        function deletePage(pageId) {
+        function deletePage() {
             PageService
                 .deletePage(pageId)
                 .success(function (page) {
@@ -152,7 +145,6 @@
                 .error(function (error) {
                     console.log(error);
                     vm.alert = "Unable to remove page. Please try again";
-
                 });
         }
     }

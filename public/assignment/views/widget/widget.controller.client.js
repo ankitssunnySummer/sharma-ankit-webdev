@@ -47,7 +47,6 @@
             .findWidgetsByPageId(pageId)
             .success(function (widgets) {
                 vm.widgets = widgets;
-
             })
             .error(function (error) {
                 console.log("In error" +error);

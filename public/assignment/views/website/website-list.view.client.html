@@ -17,8 +17,8 @@
     <div class = "top-padding">
         <div ng-repeat="website in model.websites">
             <p class="bottom-padding left-padding">
-                <a ng-href="#/user/{{website.developerId}}/website/{{website._id}}/page">{{website.name}}</a>
-                <a ng-href="#/user/{{website.developerId}}/website/{{website._id}}">
+                <a ng-href="#/user/{{website._user}}/website/{{website._id}}/page">{{website.name}}</a>
+                <a ng-href="#/user/{{website._user}}/website/{{website._id}}">
                     <span class="glyphicon glyphicon-cog pull-right right-padding"></span>
                 </a>
             </p>
