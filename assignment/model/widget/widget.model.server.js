@@ -19,9 +19,8 @@ module.exports = function() {
         var newWidget = {
             "type"          : widget.type,
             "_page"         : pageId,
-            "size"          : widget.size,
-            "text"          : widget.text
         };
+
         return WidgetModel.create(newWidget);
     }
 
@@ -40,20 +39,21 @@ module.exports = function() {
     }
 
     function updateWidget(widgetId, widget) {
-        return WidgetModel.update({_id: widgetId}, {
-            name        : widget.name,
-            text        : widget.text,
-            placeholder : widget.placeholder,
-            description : widget.description,
-            url         : widget.url,
-            width       : widget.widget,
-            height      : widget.height,
-            rows        : widget.rows,
-            size        : widget.size,
-            icon        : widget.icon,
-            deletable   : widget.deletable,
-            formatted   : widget.formatted
-        });
+        return WidgetModel.findOneAndUpdate(
+            {   _id: widgetId},
+            {   name        : widget.name,
+                text        : widget.text,
+                placeholder : widget.placeholder,
+                description : widget.description,
+                url         : widget.url,
+                width       : widget.widget,
+                height      : widget.height,
+                rows        : widget.rows,
+                size        : widget.size,
+                icon        : widget.icon,
+                deletable   : widget.deletable,
+                formatted   : widget.formatted },
+            {   upsert: true} );
     }
 
     function deleteWidget(widgetId) {

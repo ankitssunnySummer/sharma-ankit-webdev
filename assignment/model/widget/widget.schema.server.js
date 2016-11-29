@@ -5,7 +5,7 @@ module.exports = function() {
     var mongoose = require("mongoose");
     var WidgetSchema = mongoose.Schema({
         _page       : {type: mongoose.Schema.ObjectId, ref: 'PageModel'},
-        type        : {type: String, enum:['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT']},
+        type        : {type: String, enum:['HEADING', 'IMAGE', 'YOUTUBE', 'HTML', 'INPUT', 'TEXT']},
         name        : String,
         text        : String,
         placeholder : String,
@@ -13,8 +13,8 @@ module.exports = function() {
         url         : String,
         width       : String,
         height      : String,
-        rows        : Number,
-        size        : Number,
+        rows        : {type: Number, default: 10},
+        size        : {type: Number, default: 10},
         class       : String,
         icon        : String,
         deletable   : Boolean,

@@ -68,11 +68,28 @@
         }
     }
 
-    function NewWidgetController($routeParams, UserService, WebsiteService, PageService, WidgetService) {
+    function NewWidgetController($routeParams, $location, UserService, WebsiteService, PageService, WidgetService) {
         var vm =this;
         var userId = $routeParams["uid"];
         var websiteId = $routeParams["wid"];
         var pageId = $routeParams["pid"];
+        vm.createWidget = createWidget;
+
+        function createWidget(widgetType) {
+            var widget = {
+                type: widgetType
+            }
+
+            WidgetService
+                .createWidget(pageId, widget)
+                .success(function (widget) {
+                    var widId = widget._id;
+                    $location.url("/user/" + userId + "/website/" + websiteId + "/page/" + pageId + "/" + widId);
+                })
+                .error(function (error) {
+                    console.log("Error occurred: " + error);
+                });
+        }
 
         UserService
             .findUserById(userId)
@@ -109,6 +126,9 @@
             .error(function (error) {
                 console.log(error);
             });
+
+
+
     }
 
     function EditWidgetController($routeParams, $location, UserService, WebsiteService, PageService, WidgetService) {
@@ -149,8 +169,8 @@
 
         WidgetService
             .findWidgetById(widgetId)
-            .success(function (widgets) {
-                vm.widget = widgets;
+            .success(function (widgetfound) {
+                vm.widget = widgetfound;
             })
             .error(function (error) {
                 console.log(error);

@@ -9,18 +9,30 @@
         </p>
     </div>
 </nav>
+
 <div class="container-fluid ">
     <div class="navbar-text top-padding">
-        <div ng-repeat="widget in model.widgets">
-            <div class = "row">
-                <p class="bottom-padding left-padding">
-                    <a ng-href="#/user/{{model.user._id}}/website/{{model.website._id}}/page/{{model.page._id}}/{{widget._id}}">{{widget.type}}</a>
-                    </a>
-                </p>
-            </div>
+
+        <div class = "row bottom-padding left-padding">
+            <a ng-click="model.createWidget('HTML')"
+               class="btn btn-link">HTML</a>
+        </div>
+        <div class = "row bottom-padding left-padding">
+            <a ng-click ="model.createWidget('IMAGE')"
+               class="btn btn-link">Image</a>
+        </div>
+        <div class = "row bottom-padding left-padding">
+            <a ng-click="model.createWidget('YOUTUBE')"
+               class="btn btn-link">Youtube</a>
+        </div>
+        <div class = "row bottom-padding left-padding">
+            <a ng-click="model.createWidget('TEXT')"
+               class="btn btn-link">Text</a>
         </div>
     </div>
 </div>
+
+
 <nav class="navbar navbar-default navbar-fixed-bottom ">
     <div class="container-fluid  text-blue">
         <div class="pull-right">

@@ -1,8 +1,5 @@
 <div ng-switch="model.widget.type">
     <div ng-if="model.widget.type">
-        <div ng-switch-when="HEADER">
-            <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>
-        </div>
         <div ng-switch-when="IMAGE">
             <ng-include src="'views/widget/widget-image.view.client.html'"></ng-include>
         </div>
@@ -13,16 +10,8 @@
             <ng-include src="'views/widget/widget-heading.view.client.html'"></ng-include>
         </div>
         <div ng-switch-when="TEXT">
-            Text
-            <input ng-model="model.widget.text" class="form-control"/>
-            Rows
-            <input ng-model="model.widget.rows" class="form-control" type="number"/>
-            Placeholder
-            <input ng-model="model.widget.placeholder" class="form-control"/>
-            Formatted
-            <input ng-model="model.widget.formatted" type="checkbox"/>
+            <ng-include src="'views/widget/widget-text.view.client.html'"></ng-include>
         </div>
-
     </div>
 </div>
 <nav class="navbar navbar-default navbar-fixed-bottom ">

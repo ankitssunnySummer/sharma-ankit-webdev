@@ -23,6 +23,7 @@ module.exports = function() {
     }
 
     function findUserById(userId) {
+        UserModel.find
         return UserModel.findOne({_id: userId});
     }
 
