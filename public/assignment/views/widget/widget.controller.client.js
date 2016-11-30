@@ -137,6 +137,9 @@
         var websiteId = $routeParams["wid"];
         var pageId = $routeParams["pid"];
         var widgetId = $routeParams["wgid"];
+        vm.userId = userId;
+        vm.websiteId = websiteId;
+        vm.pageId = pageId;
         vm.deleteWidget = deleteWidget;
         vm.updateWidget = updateWidget;
 

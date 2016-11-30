@@ -62,11 +62,11 @@ module.exports = function (app, models) {
             .updateWidget(widgetId, widget)
             .then(
                 function (widget) {
-                 resp.json(widget);
+                    resp.json(widget);
                 },
-            function (error) {
-                console.log("Error updating widget: " + error);
-            });
+                function (error) {
+                    console.log("Error updating widget: " + error);
+                });
     }
 
     function deleteWidget(req, resp) {
@@ -93,10 +93,13 @@ module.exports = function (app, models) {
         var widget;
         var widgetId      = req.body.widgetId;
         var width         = req.body.width;
+        var userId        = req.body.userId;
+        var websiteId     = req.body.websiteId;
+        var pageId        = req.body.pageId;
         var myFile        = req.file;
         var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
+        var filename      = myFile.filename + ".jpg";     // new file name in upload folder
+        var path          = myFile.path + ".jpg";         // full path of uploaded file
         var destination   = myFile.destination;  // folder where file is saved to
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
@@ -106,13 +109,33 @@ module.exports = function (app, models) {
             .then(
                 function (widgetfound) {
                     widget = widgetfound;
+                    // now setting the url of this widget to be the file name that was created
+                    widget.url = path;
+                    console.log("Full path: "+path);
+                    console.log("Original Name: " +originalname);
+                    console.log("New file name: " +filename);
+                    console.log("Destination: " + destination);
+                    console.log("Widget: " +widget);
+
+                    // Now we need to update this widget in the database.
+
+                    WidgetModel
+                        .updateWidget(widgetId, widget)
+                        .then(
+                            function (updatedWidget) {
+                                resp.redirect('../assignment/#/user/'+userId+'/website/'+websiteId+'/page/'+pageId+'/widget/');
+                            },
+                            function (error) {
+                                console.log("Error while updating widget: " + error);
+                            }
+                        );
                 },
                 function (error) {
                     console.log("Error while uploading image: " + error);
                 });
 
-        // now setting the url of this widget to be the file name that was created
-        widget.url = filename;
-        resp.send(myFile);
+
+
+
     }
 };
