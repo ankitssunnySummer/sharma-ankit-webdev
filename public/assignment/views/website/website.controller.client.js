@@ -56,8 +56,8 @@
             });
 
         function createWebsite(name, description) {
-            if (name == undefined && description == undefined) {
-                vm.alert = "Website Name and Description cannot be empty";
+            if (vm.website.name == undefined) {
+                vm.alert = "Website Name cannot be empty. Please try again.";
                 $location.url("/user/" + userId + "/website");
             }
             else {
@@ -123,8 +123,8 @@
 
         function updateWebsite(name, description) {
             delete vm.alert;
-            if(name === "" || description === ""){
-                vm.alert = "Name and/or Description cannot be empty. Please try again";
+            if(vm.website.name === "" || vm.website.name === undefined){
+                vm.alert = "Name cannot be empty. Please try again";
             }
             else {
                 var updatedWebsite = {

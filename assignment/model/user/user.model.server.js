@@ -13,9 +13,14 @@ module.exports = function() {
         findUserByUsername       : findUserByUsername,
         findUserByCredentials    : findUserByCredentials,
         updateUser               : updateUser,
-        deleteUser               : deleteUser
+        deleteUser               : deleteUser,
+        findUserByFacebookId     : findUserByFacebookId
     };
     return api;
+    
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
+    }
 
     function createUser(user) {
         user.dateCreated = Date.now();
@@ -23,7 +28,6 @@ module.exports = function() {
     }
 
     function findUserById(userId) {
-        UserModel.find
         return UserModel.findOne({_id: userId});
     }
 

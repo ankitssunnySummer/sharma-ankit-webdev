@@ -64,8 +64,8 @@
             });
 
         function createPage() {
-            if(vm.page.name == undefined || vm.page.title == undefined){
-                vm.alert = "New page needs to have a name and a title. Try again";
+            if(vm.page.name == undefined){
+                vm.alert = "New page needs to have a name. Try again";
             }
             else {
                 var newPage = {"name": vm.page.name, "title": vm.page.title, "description": vm.page.description};
@@ -120,8 +120,8 @@
         function updatePage() {
             delete vm.alert;
 
-            if(vm.page.name === "" || vm.page.title === "") {
-                vm.alert = "Page name and/or Title cannot be empty. Please try again";
+            if(vm.page.name === "") {
+                vm.alert = "Page name cannot be empty. Please try again";
             }
             else {
                 var updatedPage =   {"name": vm.page.name, "title": vm.page.title, "description": vm.page.description};

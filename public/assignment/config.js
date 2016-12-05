@@ -26,7 +26,10 @@
             .when("/user/:uid", {
                 templateUrl     : "views/user/profile.view.client.html",
                 controller      : "ProfileController",
-                controllerAs    : "model"
+                controllerAs    : "model",
+                resolve         : {
+                    loggedin: checkLoggedin }
+
             })
             .when("/user/:uid/website", {
                 templateUrl     : "views/website/website-list.view.client.html",
@@ -78,5 +81,23 @@
                 controller      : "LoginController",
                 controllerAs    : "model"
             });
+
+        function checkLoggedin($q, $timeout, $http, $location, $rootScope) {
+            var deferred = $q.defer();
+            $http.get('/api/loggedin')
+                .success(
+                    function(user) {
+                        $rootScope.errorMessage = null;
+                        if (user !== '0') {
+                            $rootScope.currentUser = user;
+                            deferred.resolve();
+                        } else {
+                            deferred.reject();
+                            $location.url('/');
+                        }
+                    });
+            return deferred.promise;
+        };
+
     }
 })();

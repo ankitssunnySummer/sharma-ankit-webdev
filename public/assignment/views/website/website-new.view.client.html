@@ -36,6 +36,9 @@
 <div class="row container-fluid">
     <div class="col-xs-4 hidden-xs vertical-line">
         <div class = "top-padding">
+            <div ng-show="model.alert" class="alert alert-danger" role="alert">
+                {{model.alert}}
+            </div>
             <div ng-repeat="website in model.websites">
                 <p class="bottom-padding left-padding">
                     <a ng-href="#/user/{{website.developerId}}/website/{{website._id}}/page">{{website.name}}</a>

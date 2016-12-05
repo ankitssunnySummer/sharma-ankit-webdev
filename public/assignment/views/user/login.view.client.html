@@ -12,8 +12,10 @@
            class="form-control"
            placeholder="password"/>
 
-    <a ng-click="model.login(model.user.username, model.user.password)"
+    <a ng-click="model.login(model.user)"
             class="btn btn-primary btn-block">Login</a>
+    <a href="/auth/facebook" class="btn btn-primary btn-block">
+        <span class="fa fa-facebook pull-left"></span>Facebook</a>
     <a class="btn btn-success btn-block"
        href="#/register">Register</a>
 </div>

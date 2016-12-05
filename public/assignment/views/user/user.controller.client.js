@@ -7,33 +7,78 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-    function LoginController($location, UserService) {
+    function LoginController($location, UserService, $rootScope) {
         var vm = this;  //vm stands for View Model.
         vm.login = login;
 
-        function login(username, password) {
+
+
+        function login(user) {
+            if (vm.username == undefined || vm.password == undefined) {
+                vm.alert = "Username or Password cannot be empty. Please try again.";
+            }
             UserService
-                .findUserByCredentials(username, password)
-                .success(function (user) {
-                    if (user != null) {
+                .login(user)
+                .then(
+                    function(response) {
+                        var user = response.data;
+                        $rootScope.currentUser = user;
                         $location.url("/user/" + user._id);
-                    }
-                    else {
-                        vm.alert = "Username and/or password not found. Please try again.";
-                    }
-                })
-                .error(function () {
-                    console.log("Error while logging in.");
-                })
+                    },
+                    function (error) {
+                        console.log("Error occurred: " +error);
+                    });
+
+            /*
+             UserService
+             .findUserByCredentials(username, password)
+             .success(function (user) {
+             if (user != null) {
+             $location.url("/user/" + user._id);
+             }
+             else {
+             vm.alert = "Username and/or password not found. Please try again.";
+             }
+             })
+             .error(function () {
+             console.log("Error while logging in.");
+             })
+             */
         }
     }
 
-    function RegisterController($location, UserService) {
+    function RegisterController($location, UserService, $rootScope) {
         var vm = this;
         vm.createUser = createUser;
+        vm.register   = register;
+
+        function register(user) {
+            if (vm.user.username === undefined || vm.user.password === undefined || vm.user.verifyPassword === undefined) {
+                vm.alert = "No field can be empty. Please try again.";
+            }
+            else {
+                if (vm.user.password === vm.user.verifyPassword) {
+                    UserService
+                        .register(user)
+                        .then(
+                            function (response) {
+                                var user = response.data;
+                                $rootScope.currentUser = user;
+                                $location.url("/user/" + user._id);
+                            },
+                            function (error) {
+                                console.log("Error occurred: " + error);
+                            });
+                }
+                else {
+                    vm.alert = "Password and Verify Password do not match. Kindly try again.";
+                }
+            }
+        }
+
+
 
         function createUser() {
-
             if(vm.user.username == undefined || vm.user.password == undefined || vm.user.password != vm.user.verifyPassword ) {
                 vm.alert = "Username and/or Password cannot be blank and passwords should match. Please try again.";
                 $location.url("/register");
@@ -61,6 +106,7 @@
         var vm = this;
         delete vm.alert;
         var userId = $routeParams["uid"];
+
         UserService
             .findUserById(userId)
             .success(function (user) {
@@ -77,6 +123,20 @@
 
         vm.updateProfile = updateProfile;
         vm.deleteUser = deleteUser;
+        vm.logout   = logout;
+
+        function logout() {
+            UserService
+                .logout()
+                .then(
+                    function(response) {
+                        vm.user = null;
+                        $location.url("/");
+                    },
+                    function (error) {
+                        console.log("Error occurred: " +error);
+                    });
+        }
 
         function updateProfile() {
             if(username === "" || email === "") {
