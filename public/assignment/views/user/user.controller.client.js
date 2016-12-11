@@ -14,7 +14,7 @@
 
 
         function login(user) {
-            if (vm.username == undefined || vm.password == undefined) {
+            if (vm.user.username == undefined || vm.user.password == undefined) {
                 vm.alert = "Username or Password cannot be empty. Please try again.";
             }
             UserService
